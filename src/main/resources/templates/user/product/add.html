@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>물건팔기</title>
+    <link rel="stylesheet" href="/css/add.css">
+</head>
+<body>
+<div class="wrap">
+    <div class="container">
+        <div class="form">
+            <div class="img_form">
+                <form name="form" method="post" action="/user/product/add" enctype="multipart/form-data">
+
+                    <input type="file" name="files" multiple="multiple"/>
+
+
+                    <div class="title">
+                        <label>제목</label>
+                        <div>
+                            <input class="title" type="text" placeholder="제목" name="title" >
+                        </div>
+                    </div>
+
+                    <div class="price">
+                        <label>가격</label>
+                        <div>
+                            <input  class="price" type="text" placeholder="가격을 입력해주세요" name="price" >
+                        </div>
+
+                    </div>
+                    <div class="details">
+                        <label>자세한 설명</label>
+                        <div >
+                            <input class="details"type="text" placeholder="게시글 내용을 작성해주세요
+                            (판매 금지 물품은 게시가 제한될 수 있어요)"  name="details">
+
+                        </div>
+
+                    </div>
+                    <div class="place">
+                        <label>거래 희망 장소</label>
+                        <div>
+                            <input class="place" type="text" placeholder="장소를 입력해주세요" name="place">
+                        </div>
+
+                    </div>
+                    <input   type="submit" id="submit" value="전송"/>
+                </form>
+
+
+            </div>
+
+
+
+
+
+
+
+        </div>
+    </div>
+
+</div>
+
+</div>
+</body>
+</html>
