@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>당근마켓</title>
-    <link rel="stylesheet" th:href="@{/css/read.css}" />
+    <link rel="stylesheet" href="css/read.css" />
 
 </head>
 <body>
@@ -130,9 +130,13 @@
                 </div>
                 <hr />
                 <div class="read_info">
+
                     <img th:src="@{'/imageboard/'+${imageBoard.username}+'/'+${imageBoard.id}+'/'+${file}}"  alt="Image">
-                    <div class="details">
+                    <div class="price">
                         <p th:text="${imageBoard.price}" name="price">가격</p>
+                    </div>
+                    <div class="details">
+                        <p th:text="${imageBoard.details}" name="details">세부사항</p>
                     </div>
                     <div class="place">
                         <p th:text="${imageBoard.place}" name="place">여기에 장소</p>

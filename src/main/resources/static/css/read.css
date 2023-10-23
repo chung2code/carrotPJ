@@ -171,12 +171,24 @@ nav li a {
 }
 .read_info > img {
   margin: 20px 0;
+  width: 300px;
+}
+.read_info > .price p {
+  margin-bottom: 20px;
+  font-size: large;
+  font-weight: 300;
 }
 .read_info > .details p {
   margin-bottom: 20px;
+  font-size: large;
+  font-weight: 300;
 }
-.read_info > .place {
+.read_info > .place p {
+  margin-bottom: 20px;
+  font-size: large;
+  font-weight: 300;
 }
+
 .read_btn button {
   width: 200px;
   height: 50px;
@@ -383,8 +395,40 @@ nav li a {
   -webkit-box-shadow: var(--circle-checked-shadow);
   box-shadow: var(--circle-checked-shadow);
 }
-
 /* ------------------------------------------------- */
+
+/* recommnet_area */
+.recomment_box {
+  margin: 12px 0 29px;
+  padding: 16px 10px 10px 18px;
+  border: 2px solid rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+  box-sizing: border-box;
+  flex-wrap: wrap;
+}
+.recomment_inbox > .recomment_inbox_name {
+  margin-bottom: 10px;
+}
+.recomment_text_wrap .recomment_text p {
+  font-size: 10px;
+}
+.recomment_info > .recomment_date {
+  margin-right: 10px;
+  width: 100px;
+}
+.recommnet_btn {
+  margin: 10px 0;
+  display: flex;
+  justify-content: space-between;
+}
+.recommnet_btn > .re {
+  border: 2px solid rgba(0, 0, 0, 0.1);
+  padding: 5px;
+}
+.recommnet_btn > .like {
+  border: 2px solid rgba(0, 0, 0, 0.1);
+  padding: 5px;
+}
 footer {
   background-color: #ffffff;
   color: black;
