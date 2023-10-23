@@ -142,15 +142,15 @@ button {
   margin-right: 2rem;
 }
 .google_icon {
-  width: 10px;
+  width: 55px;
 
 }
 .oauth_icon>a>.google_icon > * {
   margin-right: 10px;
 }
 .oauth_icon >a>.kakao_icon{
-  width: 10px;
+  width: 55px;
 }
 .oauth_icon>a> .naver_icon{
-  width: 10px;
+  width: 55px;
 }

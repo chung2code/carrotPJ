@@ -1,30 +1,28 @@
 package com.example.demo.domain.user.entity;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.web.multipart.MultipartFile;
+
 
 import javax.persistence.*;
-
 import java.time.LocalDateTime;
+import java.util.List;
 
-
-@Entity
-@Table(name = "product")
 @Data
-@Builder
+@Entity
 @AllArgsConstructor
 @NoArgsConstructor
-public class Product {
+@Builder
+public class ImageBoard {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Pno;
+    private Long id;
+
+    private String username;
 
     private String title;
     private String details;
@@ -33,22 +31,12 @@ public class Product {
 
 
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime reg_date;
+    private LocalDateTime createdAt;
 
-    private MultipartFile[] files;
-    private boolean salesCompleted;
     private Long count;
-    private String dirPath;
-    private String filename;
-    private String filesize;
 
-
-
-
-
-
-
-
+    @ElementCollection
+    private List<String> files;
 
 
 

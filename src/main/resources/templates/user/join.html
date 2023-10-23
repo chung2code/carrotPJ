@@ -9,7 +9,7 @@
 <body>
 <div id="wrap">
     <div class="container">
-        <a class="mainlogo" href="#">
+        <a class="mainlogo" href="/">
           <span>
             <svg
                     width="65"
@@ -61,231 +61,68 @@
 <!-- main -->
 <section>
     <div class="join">
-        <form action="doJoin" method="POST" class="joinForm" onsubmit="DoJoinForm__submit(this); return false;">
+        <form action="/user/join" method="POST" name="joinform" class="joinForm" onsubmit=" return false;">
 
             <h2>회원가입</h2>
             <div class="textForm">
-                <input name="loginId" type="text" class="id" placeholder="아이디">
+                <input name="Id" type="text" class="id" placeholder="아이디">
 
             </div>
             <div class="textForm">
-                <input name="loginPw" type="password" class="pw" placeholder="비밀번호">
+                <input name="password" type="password" class="pw" placeholder="비밀번호">
             </div>
             <div class="textForm">
-                <input name="loginPwConfirm" type="password" class="pw" placeholder="비밀번호 확인">
+                <input name="passwordcheck" type="password" class="pw" placeholder="비밀번호 확인">
             </div>
             <div class="textForm">
-                <input name="name" type="password" class="name" placeholder="이름">
+                <input name="name" type="text" class="name" placeholder="이름">
             </div>
             <div class="textForm">
-                <input name="email" type="text" class="email" placeholder="이메일">
+                <input name="Email" type="text" class="email" placeholder="이메일">
             </div>
+
             <div class="textForm">
                 <input name="nickname" type="text" class="nickname" placeholder="닉네임">
             </div>
             <div class="textForm">
-                <input name="cellphoneNo" type="number" class="cellphoneNo" placeholder="전화번호">
+                <input name="phone" type="number" class="cellphoneNo" placeholder="전화번호">
             </div>
-            <input type="submit" class="btn" value="J O I N"/>
+            <button type="submit" class="btn" value="J O I N" onclick="isValid()">J O I N</button>
         </form>
     </div>
 </section>
 <script>
 
-
-  var emoverChk = false;
-	$("#emoverlay").click(function(){
-		var email = $("#email").val();
-			$.ajax({
-				type:'post'
-				,url:'emoverlay'
-				,data:{'email' : email }
-				,dataType:'JSON'
-				,success:function(obj){
-					console.log(obj);
-					if(obj.use2 != 1){
-						alert('사용할 수 있는 이메일 입니다.');
-						emoverChk= true;
-					}else{
-						alert('이미 사용중인 이메일 입니다.');
-
-					}
-				}
-				,error:function(e){
-					console.log(e);
-				}
-			});
-		});
-		var overChk = false;
-		$("#overlay").click(function(){
-			var id = $("#id").val();
-				$.ajax({
-					type:'post'
-					,url:'overlay'
-					,data:{'id' : id }
-					,dataType:'JSON'
-					,success:function(obj){
-						console.log(obj);
-						if(obj.use != 1){
-							alert('사용할 수 있는 아이디 입니다.');
-							overChk= true;
-						}else{
-							alert('이미 사용중인 아이디 입니다.');
-
-						}
-					}
-					,error:function(e){
-						console.log(e);
-					}
-				});
-			});
-			var idc = false;
-		    var pwc = false;
-		    var pwc2 = false;
-		    var phonec = false;
-		    var namec = false;
-		    var emailc = false;
-		    var birthJ = false;
-
-			  //모든 공백 체크 정규식
-				var empJ = /\s/g;
-				//아이디 정규식
-				var idJ = /^[a-z0-9]{5,20}$/;
-				// 비밀번호 정규식
-				var pwJ = /^[a-z0-9]{6,20}$/;
-				// 이름 정규식
-				var nameJ = /^[가-힣]{2,6}$/;
-				// 휴대폰 번호 정규식
-				var phoneJ = /^01([0|1|6|7|8|9]?)?([0-9]{3,4})?([0-9]{4})$/;
-				 $("#member_id").focusout(function(){
-			     if($('#member_id').val() == ""){
-
-			   		$('#idch').text('*필수 정보입니다.');
-			   	  	$('#idch').css('color', 'red');
-			   		return false;
-
-				}else if(!idJ.test($(this).val())){
-					$('#idch').text('5~20자의 영문 소문자, 숫자만 사용가능합니다')
-					$('#idch').css('color', 'red')
-			   		return false;
-
-				}else if($(this).val().indexOf("admin") != -1){
-					$('#idch').text('admin이 포함된 아이디는 사용할 수 없습니다.')
-					$('#idch').css('color', 'red')
-					return false;
-		       }else{
-			         idc = true;
-			         $("#idch").hide();
-			         return true;
-			     }
-			 });
-
-			$('#pw2ch').text('6~20자의 영문 소문자, 숫자만 사용가능합니다')
-			$('#pw2ch').css('color', 'red')
-		   $("#pw").focusout(function(){
-			     if($('#pw').val() == ""){
-
-			    	 $('#pw2ch').text('*필수 정보입니다.');
-				   	 $('#pw2ch').css('color', 'red');
-					 return false;
-
-				    }else if(!pwJ.test($(this).val())){
-					$('#pw2ch').text('6~20자의 영문 소문자, 숫자만 사용가능합니다')
-					$('#pw2ch').css('color', 'red')
-					return false;
-			       }else{
-				         pwc2 = true;
-				         $('#pw2ch').hide();
-				         return true;
-				     }
-				 });
-
-		$("#pw2").keyup(function(){
-
-		    if($(this).val()!=$("#pw").val()){
-		        $("#pwch").html("비밀번호가 다릅니다");
-		        $("#pwch").css("color",'red');
-		        pwc = false;
-
-		    }else{
-		        $("#pwch").html("비밀번호가 일치합니다");
-		        $("#pwch").css("color",'blue');
-		        pwc = true;
-		    }
-		});
-
-		$("#pw").keyup(function(){
-
-		    if($(this).val()!=$("#pw2").val()){
-		        $("#pwch").html("비밀번호가 다릅니다");
-		        $("#pwch").css("color",'red');
-		        pwc = false;
-
-		    }else{
-		        $("#pwch").html("비밀번호가 일치합니다");
-		        $("#pwch").css("color",'blue');
-		        pwc = true;
-		    }
-		});
-			$("#name").focusout(function(){
-			   if($('#name').val() == ""){
-
-				   $('#namech').text('*필수 정보입니다.');
-				   $('#namech').css('color', 'red');
-
-			   }else{
-			       namec = true;
-			   }
-			});
+    //모든 공백 체크 정규식
+var empJ = /\s/g;
+//아이디 정규식
+var idJ = /^[a-z0-9]{5,20}$/;
+// 비밀번호 정규식
+var pwJ = /^[a-z0-9]{6,20}$/;
+// 이름 정규식
+var nameJ = /^[가-힣]{2,6}$/;
+// 휴대폰 번호 정규식
+var phoneJ = /^01([0|1|6|7|8|9]?)?([0-9]{3,4})?([0-9]{4})$/;
 
 
-		$("#email").focusout(function(){
-			   if($('#email').val() == ""){
+   const isValid = ()=>{
+                        const form = document.joinform;
+                        /*
+                        if(form.Id.value.trim()==""){
+                            alert("ID을 입력하세요.");
+                            return;
+                        }
+                        if(form.password.value.trim()==""){
+                            alert("PASSWORD을 입력하세요.");
+                            return;
+                        }
+                        */
 
-				   $('#emch').text('*필수 정보입니다.');
-				   $('#emch').css('color', 'red');
-					$(this).focus();
-					return false;
-			   }else{
-			       emailc = true;
-			       return true;
-			   }
-			});
-			function regist(){
-
-
-			var id = $("#member_id").val();
-			var pw = $("#pw").val();
-			var pw2 = $("#pw2").val();
-			var phone = $("#phone").val();
-			var name = $("#name").val();
-			var email = $("#email").val();
-			var addr = $("#sample4_jibunAddress").val();
-			var birth = $("#birth_date").val();
+                        form.submit();
+                    }
 
 
-	  if(idc == false || id === ""){
-	      alert('아이디를 확인 해 주세요')
-	  }else if(overChk == false){
-	      alert('아이디 중복 검사를 해주세요')
-	  }else if(pwc == false|| pw2 === "" || pwc2 == false){
-	      alert('비밀번호를 확인 해 주세요')
-	  }else if(namec == false || name === ""){
-	  	alert('이름을 입력해주세요')
-
-
-
-	  }else if(emailc == false || email === ""){
-	  	alert('이메일을 입력해주세요')
-	  }else if(emoverChk == false){
-	  	alert('이메일을 중복 검사를 해주세요')
-	  }else if(phonec == false || phone === ""){
-	      alert('전화번호를 입력해주세요.')
-	  }else{
-	      $('form').submit();
-	  }
-	} ;
-			</script>
+</script>
 
 </body>
 </html>

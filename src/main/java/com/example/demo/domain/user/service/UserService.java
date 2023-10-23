@@ -22,41 +22,34 @@ public class UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public boolean joinMember(UserDto dto, Model model, HttpServletRequest request)
-    {
-
-        //패스워드 일치여부확인
-        if(!dto.getPassword().equals(dto.getRepassword()))
-        {
-            model.addAttribute("repassword","패스워드가 일치하지 않습니다");
-            return false;
+    public User joinMember(UserDto dto, Model model) {
+        // 패스워드 일치 여부 확인
+        if (!dto.getPassword().equals(dto.getPasswordcheck())) {
+            model.addAttribute("repassword", "패스워드가 일치하지 않습니다");
+            return null;
         }
 
-        //Email 인증여부 확인
-        HttpSession session = request.getSession();
-        Boolean is_email_auth = (Boolean)session.getAttribute("is_email_auth");
-        if(is_email_auth!=null)
-        {
-            if(is_email_auth)   //코드 인증 확인 -> 회원가입 진행
-            {
-                dto.setRole("ROLE_USER");
-                dto.setPassword(passwordEncoder.encode(dto.getPassword()) );
+        dto.setRole("ROLE_USER");
+        dto.setPassword(passwordEncoder.encode(dto.getPassword()));
 
-                User user = UserDto.dtoToEntity(dto);
+        User user = UserDto.dtoToEntity(dto);
 
-                userRepository.save(user);
+        // DB에 사용자 정보 저장 후 결과 검증
+        User savedUser = userRepository.save(user);
 
-                return true;
-            }
-            else                //Code 인증 실패상태,,,
-            {
-                return false;
-            }
-
+        if (savedUser == null || savedUser.getId() == null) {
+            // TODO: 로그 출력 또는 예외 처리 등 필요한 작업 수행
+            return null;
         }
-        else            //Code인증 진행x
-        {
-            return false;
-        }
+
+        return savedUser;  // 성공적으로 저장된 사용자 정보 반환
+    }
+
+
+    //프로필업데이트
+    public void updateProfile(UserDto dto){
+        User user = UserDto.dtoToEntity(dto);
+
+        userRepository.save(user);
     }
 }

@@ -112,17 +112,17 @@
 
             <div class="item_list">
 
-                <div th:each="productList : ${productList}" class="card">
+                <div th:each="imageBoard,i: ${list}" class="card">
                     <div class="img">
-                        <img src="/upload/${product.dirPath}/${product.filename}" alt="Image">
+                        <img th:src="@{'/resources/imageboard/'+${imageBoard.username}+'/'+${imageBoard.id}+'/s_'+${imageBoard.files.get(0)}}"alt="Image">
 
 
                     </div>
                     <div class="text">
-                        <a  th:text="${productList.title}" name="title"></a>
-                        <p th:text="${productList.details}" name="details"></p>
-                        <p th:text="${productList.place}" name="place"></p>
-                       <td> <a class="btn btn-primary" th:href="@{/user/product/read(Pno=${productList.Pno},pageNo=${pageNo})}"> 사러가기</a></td>
+                        <a  th:text="${imageBoard.title}" name="title"></a>
+                        <p th:text="${imageBoard.details}" name="details"></p>
+                        <p th:text="${imageBoard.place}" name="place"></p>
+                       <td> <a class="btn btn-primary" th:href="@{/user/product/read(id=${imageBoard.id})}">사러가기</a></td>
 
                     </div>
                 </div>
@@ -135,49 +135,33 @@
     </section>
 
     <button class="floating_btn" type="button" onclick="window.location.href='/user/product/add'">글쓰기</button>
-    <div class="pagenation col-9">
-        <nav aria-label="Page navigation example">
-            <ul class="pagination">
 
+    <section class="">
+        <div class="paging-block">
 
-                <!-- PREV -->
-                <li class="page-item" th:if="${pageDto != null && pageDto.prev}">
-
-                    <a class="page-link"
-                       th:href="@{/user/product/list(pageNo=${pageDto.nowBlock * pageDto.pagePerBlock - pageDto.pagePerBlock*2 + 1} )}"
-                       aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
-                </li>
-
-
-                <!-- PAGENATION -->
-                <th:block
-                        th:if="${pageDto != null && pageDto.startPage != null && pageDto.endPage != null && pageDto.startPage <= pageDto.endPage}">
-                    <li class="page-item" th:each="i : ${#numbers.sequence(pageDto.startPage, pageDto.endPage)}">
-                        <a class="page-link" th:href="@{/user/product/list(pageNo=${i})}">
-                            <span th:text="${i}"></span>
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
                         </a>
                     </li>
-                </th:block>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+        </div>
 
 
-                <!-- NEXT -->
-                <li class="page-item" th:if="${pageDto != null && pageDto.next}">
 
-
-                    <a class="page-link"
-                       th:href="@{/user/product/list(pageNo=${pageDto.nowBlock*pageDto.pagePerBlock+1} )}"
-                       aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>
-
-                </li>
-
-
-            </ul>
-        </nav>
-    </div>
+    </section>
 
 
 </div>

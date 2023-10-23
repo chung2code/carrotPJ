@@ -23,6 +23,7 @@ public class ProductDto {
     private String details;
     @NotBlank
     private String place;
+    private String price;
     private String category;
     private String user;
 
@@ -42,9 +43,9 @@ public class ProductDto {
      dto.setPno(product.getPno());
      dto.setTitle(product.getTitle());
      dto.setDetails(product.getDetails());
-     dto.setCategory(product.getCategory());
      dto.setPlace(product.getPlace());
      dto.setCount(product.getCount());
+
 
 
 

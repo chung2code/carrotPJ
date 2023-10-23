@@ -113,7 +113,7 @@ public class PrincipalDetailsOAuth2Service extends DefaultOAuth2UserService   im
         dto.setPassword(user.get().getPassword());
         dto.setRole(user.get().getRole());
         dto.setPhone(user.get().getPhone());
-        dto.setNickName(user.get().getNickName());
+        dto.setNickname(user.get().getNickname());
 
 
         PrincipalDetails principalDetails = new PrincipalDetails();

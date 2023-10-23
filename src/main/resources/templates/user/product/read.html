@@ -112,11 +112,11 @@
                     </nav>
                 </div>
                 <div class="title">
-                    <p th:text="${productDto.title}" name="title">title</p>
+                    <p th:text="${imageBoard.title}" name="title">title</p>
                 </div>
                 <div class="profile">
                     <div>
-                        <img src="/uploads/${product.dirPath}/${product.filename}" alt="Image">
+                        <img src="#" alt="Image">
                         <a href="#">username</a>
                     </div>
                     <div class="sell_select">
@@ -130,12 +130,12 @@
                 </div>
                 <hr />
                 <div class="read_info">
-                    <img src="" alt="물건사진" th:src="${productDto.dirPath}" />
+                    <img th:src="@{'/resources/imageboard/'+${imageBoard.username}+'/'+${imageBoard.id}+'/'+${file}}"  alt="Image">
                     <div class="details">
-                        <p th:text="${productDto.details}" name="details">여기에 세부내용을!!</p>
+                        <p th:text="${imageBoard.price}" name="price">가격</p>
                     </div>
                     <div class="place">
-                        <p th:text="${productDto.place}" name="place">여기에 장소</p>
+                        <p th:text="${imageBoard.place}" name="place">여기에 장소</p>
                     </div>
                 </div>
                 <hr/>
