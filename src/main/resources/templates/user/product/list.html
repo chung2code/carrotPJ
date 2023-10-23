@@ -210,15 +210,42 @@
         </div>
     </div>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
-        function openpop() {
-          document.getElementById("popup_layer").style.display = "block";
-        }
+$(document).ready(function(){
+  $("#addform").submit(function(event){
+    event.preventDefault(); // 기본 submit 동작을 막습니다.
 
-        function closePop() {
-          document.getElementById("popup_layer").style.display = "none";
-        }
-      </script>
+    var formData = new FormData(this); // form의 모든 필드 값을 가져옵니다.
+
+    $.ajax({
+      type: "POST",
+      url: "/user/product/add",
+      data: formData,
+      processData: false,  // 필수 : 데이터를 query string으로 변환하는 jQuery 형식을 방지합니다.
+      contentType: false,  // 필수 : contentType을 false로 지정하면 브라우저가 formData에 적합한 contentType을 설정합니다.
+      success: function(response){
+        alert("성공적으로 게시물이 추가되었습니다.");
+        closePop();
+        window.location.href = "/user/product/list";  // list 페이지로 리다이렉트
+      },
+      error: function(jqXHR, textStatus, errorThrown){
+        alert("게시물 추가 실패 : " + textStatus);
+        console.error(errorThrown);
+      }
+    });
+  });
+});
+
+function openpop() {
+  document.getElementById("popup_layer").style.display = "block";
+}
+
+function closePop() {
+  document.getElementById("popup_layer").style.display = "none";
+}
+</script>
+
 
     <!-- <button class="floating_btn"type="button" onclick="window.location.href='/user/product/add'">글쓰기</button> -->
     <div class="pagenation col-9">
