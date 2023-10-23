@@ -130,7 +130,7 @@
                 </div>
                 <hr />
                 <div class="read_info">
-                    <img th:src="@{'/imageboard/'+${imageBoard.username}+'/'+${imageBoard.id}+'/s_'+${imageBoard.files.get(0)}}"alt="Image">
+                    <img th:src="@{'/imageboard/'+${imageBoard.username}+'/'+${imageBoard.id}+'/'+${imageBoard.files.get(0)}}"alt="Image">
                     <div class="details">
                         <p th:text="${imageBoard.price}" name="price">가격</p>
                     </div>
