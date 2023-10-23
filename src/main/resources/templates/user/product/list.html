@@ -114,7 +114,7 @@
 
                 <div th:each="imageBoard,i: ${list}" class="card">
                     <div class="img">
-                        <img th:src="@{'/resources/imageboard/'+${imageBoard.username}+'/'+${imageBoard.id}+'/s_'+${imageBoard.files.get(0)}}"alt="Image">
+                        <img th:src="@{'/imageboard/'+${imageBoard.username}+'/'+${imageBoard.id}+'/'+${imageBoard.files.get(0)}}"alt="Image">
 
 
                     </div>
