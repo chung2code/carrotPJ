@@ -6,6 +6,7 @@ import com.example.demo.domain.user.entity.ImageBoard;
 import com.example.demo.domain.user.service.ImageBoardService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -40,13 +41,14 @@ public class ImageBoardController {
 
     }
     @PostMapping("/add")
-    public void f2_post(ImageBoardDto dto, Authentication authentication) throws IOException{
+    public ResponseEntity<?> f2_post(ImageBoardDto dto, Authentication authentication) throws IOException{
         log.info("POST /user/product/add"+dto+"|"+authentication);
         dto.setCreatedAt(LocalDateTime.now());
         PrincipalDetails principal = (PrincipalDetails) authentication.getPrincipal();
         dto.setUsername(principal.getUsername());
 
         imageBoardService.addImageBoard(dto);
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping("/read")

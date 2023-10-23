@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>product</title>
-    <link rel="stylesheet" th:href="@{/css/list.css}" />
+    <link rel="stylesheet" href="/css/list.css" />
 </head>
 <body>
 <div id="wrap">
@@ -81,9 +81,8 @@
                     </svg>
                     <input
                             placeholder="물품을 검색해보세요"
-                            type="text"
+                            type="search"
                             class="input"
-                            name="keyword"
                     />
                 </form>
                 <div>
@@ -91,14 +90,14 @@
                 </div>
 
                 <div class="login">
-                    <button type="button" onclick="location.href='/user/login'">로그인</button>
+                    <button type="button" onclick="location.href='/user/login'">
+                        로그인
+                    </button>
                 </div>
             </div>
         </div>
-
     </div>
     <!-- main -->
-
 
     <section class="serv_list">
         <div class="content">
@@ -106,15 +105,13 @@
                 <h1>최신 중고물품</h1>
             </div>
 
-
             <!-- 리스트 -->
-
 
             <div class="item_list">
 
                 <div th:each="imageBoard,i: ${list}" class="card">
                     <div class="img">
-                        <img th:src="@{'/resources/imageboard/'+${imageBoard.username}+'/'+${imageBoard.id}+'/s_'+${imageBoard.files.get(0)}}"alt="Image">
+                        <img th:src="@{'/imageboard/'+${imageBoard.username}+'/'+${imageBoard.id}+'/'+${imageBoard.files.get(0)}}"alt="Image">
 
 
                     </div>
@@ -122,48 +119,179 @@
                         <a  th:text="${imageBoard.title}" name="title"></a>
                         <p th:text="${imageBoard.details}" name="details"></p>
                         <p th:text="${imageBoard.place}" name="place"></p>
-                       <td> <a class="btn btn-primary" th:href="@{/user/product/read(id=${imageBoard.id})}">사러가기</a></td>
+                        <td> <a class="btn btn-primary" th:href="@{/user/product/read(id=${imageBoard.id})}">사러가기</a></td>
 
                     </div>
                 </div>
             </div>
-
-
         </div>
-
-
     </section>
 
-    <button class="floating_btn" type="button" onclick="window.location.href='/user/product/add'">글쓰기</button>
+    <a class="floating_btn" type="button" href="javascript:openpop()">
+        글쓰기
+    </a>
+    <div class="popup_layer" id="popup_layer" style="display: none">
+        <div class="popup_box">
+            <div style="height: 10px; width: 100%; float: top; " >
+                <a href="javascript:closePop();"
+                ><img
+                        src="/images/ic_close.svg"
+                        class="m_header-banner-close"
+                        width="30px"
+                        height="30px"
+                /></a>
+            </div>
+            <!--팝업 컨텐츠 영역-->
+            <h1>내 물건 팔기</h1>
+            <form
+                    id="addform"
+                    action="/user/product/add"
+                    method="post"
+                    enctype="multipart/form-data"
+            >
+                <div class="addcontent">
+                    <div class="addimg">
 
-    <section class="">
-        <div class="paging-block">
+                        <input type="file" name="files" multiple="multiple" />
 
-            <nav aria-label="Page navigation example">
-                <ul class="pagination">
-                    <li class="page-item">
-                        <a class="page-link" href="#" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                        </a>
-                    </li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item">
-                        <a class="page-link" href="#" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
+                    </div>
+                    <div class="addcont">
 
+                        <label for="title" >제목</label><br />
+                        <input
+                                type="text"
+                                id="title"
+                                name="title"
+                                placeholder="제목"
+                        />
+                    </div>
+                    <br />
+                    <div class="addcont">
+
+                        <label for="price">가격</label><br />
+                        <input
+                                type="number"
+                                id="price"
+                                name="price"
+                                placeholder="&#8361; 가격을 입력해주세요"
+                        /><br />
+                    </div>
+                    <div class="addcont">
+
+                        <label for="details">자세한 설명</label><br />
+                        <input
+                                type="text"
+                                id="details"
+                                name="details"
+                                placeholder="게시글 내용을 작성해 주세요"
+                                style="height: 100px;"
+                        /><br />
+                    </div >
+                    <div class="addcont">
+
+                        <label for="place">거래희망장소</label><br />
+                        <input
+                                type="text"
+                                id="place"
+                                name="place"
+
+                        /><br />
+                    </div >
+                    <div class="writebtn">
+
+                        <input class="addbtn" type="submit" value="작성 완료" />
+                    </div>
+                </div>
+            </form>
+            <!--팝업 버튼 영역-->
+            <div class="popup_btn" style="float: bottom; margin-top: 205px">
+                <a href="javascript:closePop();">닫기</a>
+            </div>
         </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+$(document).ready(function(){
+  $("#addform").submit(function(event){
+    event.preventDefault(); // 기본 submit 동작을 막습니다.
+
+    var formData = new FormData(this); // form의 모든 필드 값을 가져옵니다.
+
+    $.ajax({
+      type: "POST",
+      url: "/user/product/add",
+      data: formData,
+      processData: false,  // 필수 : 데이터를 query string으로 변환하는 jQuery 형식을 방지합니다.
+      contentType: false,  // 필수 : contentType을 false로 지정하면 브라우저가 formData에 적합한 contentType을 설정합니다.
+      success: function(response){
+        alert("성공적으로 게시물이 추가되었습니다.");
+        closePop();
+        window.location.href = "/user/product/list";  // list 페이지로 리다이렉트
+      },
+      error: function(jqXHR, textStatus, errorThrown){
+        alert("게시물 추가 실패 : " + textStatus);
+        console.error(errorThrown);
+      }
+    });
+  });
+});
+
+function openpop() {
+  document.getElementById("popup_layer").style.display = "block";
+}
+
+function closePop() {
+  document.getElementById("popup_layer").style.display = "none";
+}
+</script>
 
 
+    <!-- <button class="floating_btn"type="button" onclick="window.location.href='/user/product/add'">글쓰기</button> -->
+    <div class="pagenation col-9">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <!-- PREV -->
+                <li class="page-item" th:if="${pageDto != null && pageDto.prev}">
+                    <a
+                            class="page-link"
+                            th:href="@{/user/product/list(pageNo=${pageDto.nowBlock * pageDto.pagePerBlock - pageDto.pagePerBlock*2 + 1} )}"
+                            aria-label="Previous"
+                    >
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
 
-    </section>
+                <!-- PAGENATION -->
+                <th:block
+                        th:if="${pageDto != null && pageDto.startPage != null && pageDto.endPage != null && pageDto.startPage <= pageDto.endPage}"
+                >
+                    <li
+                            class="page-item"
+                            th:each="i : ${#numbers.sequence(pageDto.startPage, pageDto.endPage)}"
+                    >
+                        <a
+                                class="page-link"
+                                th:href="@{/user/product/list(pageNo=${i})}"
+                        >
+                            <span th:text="${i}"></span>
+                        </a>
+                    </li>
+                </th:block>
 
-
+                <!-- NEXT -->
+                <li class="page-item" th:if="${pageDto != null && pageDto.next}">
+                    <a
+                            class="page-link"
+                            th:href="@{/user/product/list(pageNo=${pageDto.nowBlock*pageDto.pagePerBlock+1} )}"
+                            aria-label="Next"
+                    >
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
 </div>
 
 <!-- 푸터 -->
@@ -210,24 +338,15 @@
             </nav>
         </section>
 
-
         <section class="foot_sct2">
             <section class="foot_text1">
                 <div>
                     <b>만든이</b>
-                    <span>
-                송재욱
-                </span>
+                    <span> 송재욱 </span>
                 </div>
-
             </section>
-            <section class="sns_icon">
-
-            </section>
-            <section class="foot_text2">
-
-            </section>
-
+            <section class="sns_icon"></section>
+            <section class="foot_text2"></section>
         </section>
     </div>
 </footer>
