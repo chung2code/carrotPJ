@@ -6,6 +6,7 @@ import com.example.demo.domain.user.entity.ImageBoard;
 import com.example.demo.domain.user.service.ImageBoardService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -13,6 +14,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -41,15 +44,41 @@ public class ImageBoardController {
 
     }
     @PostMapping("/add")
-    public ResponseEntity<?> f2_post(ImageBoardDto dto, Authentication authentication) throws IOException{
-        log.info("POST /user/product/add"+dto+"|"+authentication);
-        dto.setCreatedAt(LocalDateTime.now());
-        PrincipalDetails principal = (PrincipalDetails) authentication.getPrincipal();
-        dto.setUsername(principal.getUsername());
+    public ResponseEntity<?> f2_post(
+            @RequestParam("title") String title,
+            @RequestParam("details") String details,
+            @RequestParam("price") String price,
+            @RequestParam("place") String place,
+            @RequestParam("files") List<MultipartFile> files,
+            Authentication authentication) throws IOException {
+        log.info("POST /user/product/add");
 
-        imageBoardService.addImageBoard(dto);
-        return ResponseEntity.ok().build();
+        ImageBoardDto dto = new ImageBoardDto();
+        dto.setTitle(title);
+        dto.setDetails(details);
+        dto.setPrice(price);
+        dto.setPlace(place);
+
+
+        if (!files.isEmpty()) {
+            // If the file list is not empty, add it to the DTO
+            dto.setFiles(files);
+        }
+
+        dto.setCreatedAt(LocalDateTime.now());
+
+        PrincipalDetails principal = (PrincipalDetails) authentication.getPrincipal();
+
+        if (principal != null) {
+            dto.setUsername(principal.getUsername());
+            // ... call the service method to save the data
+            imageBoardService.addImageBoard(dto);
+            return ResponseEntity.ok().build();
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
     }
+
 
     @GetMapping("/read")
     public void f3(Long id,Model model){

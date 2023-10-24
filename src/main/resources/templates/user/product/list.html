@@ -139,6 +139,7 @@
                         class="m_header-banner-close"
                         width="30px"
                         height="30px"
+                        style="border:none;"
                 /></a>
             </div>
             <!--팝업 컨텐츠 영역-->
@@ -152,7 +153,21 @@
                 <div class="addcontent">
                     <div class="addimg">
 
-                        <input type="file" name="files" multiple="multiple" />
+                        <section class="product_img_block">
+                            <div class="product_img">
+                                <div class="upload-box">
+                                    <div class="plus">+</div>
+
+
+
+                                </div>
+                            </div>
+                            <div>
+                                <label>PREVIEW</label>
+                                <div id="preview"></div>
+                            </div>
+                        </section>
+
 
                     </div>
                     <div class="addcont">
@@ -198,53 +213,20 @@
                         /><br />
                     </div >
                     <div class="writebtn">
+                 <!-- <input class="addbtn" type="submit" value="작성 완료" />-->
 
-                        <input class="addbtn" type="submit" value="작성 완료" />
+                        <button type="submit" class='add_product-btn'>작 성 완 료</button>
                     </div>
                 </div>
             </form>
             <!--팝업 버튼 영역-->
-            <div class="popup_btn" style="float: bottom; margin-top: 205px">
+            <div class="popup_btn" style="float: bottom; margin-top: 70px">
                 <a href="javascript:closePop();">닫기</a>
             </div>
         </div>
     </div>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script>
-$(document).ready(function(){
-  $("#addform").submit(function(event){
-    event.preventDefault(); // 기본 submit 동작을 막습니다.
 
-    var formData = new FormData(this); // form의 모든 필드 값을 가져옵니다.
-
-    $.ajax({
-      type: "POST",
-      url: "/user/product/add",
-      data: formData,
-      processData: false,  // 필수 : 데이터를 query string으로 변환하는 jQuery 형식을 방지합니다.
-      contentType: false,  // 필수 : contentType을 false로 지정하면 브라우저가 formData에 적합한 contentType을 설정합니다.
-      success: function(response){
-        alert("성공적으로 게시물이 추가되었습니다.");
-        closePop();
-        window.location.href = "/user/product/list";  // list 페이지로 리다이렉트
-      },
-      error: function(jqXHR, textStatus, errorThrown){
-        alert("게시물 추가 실패 : " + textStatus);
-        console.error(errorThrown);
-      }
-    });
-  });
-});
-
-function openpop() {
-  document.getElementById("popup_layer").style.display = "block";
-}
-
-function closePop() {
-  document.getElementById("popup_layer").style.display = "none";
-}
-</script>
 
 
     <!-- <button class="floating_btn"type="button" onclick="window.location.href='/user/product/add'">글쓰기</button> -->
@@ -295,7 +277,6 @@ function closePop() {
 </div>
 
 <!-- 푸터 -->
-<hr>
 <footer>
     <div>
         <section>
@@ -351,5 +332,20 @@ function closePop() {
         </section>
     </div>
 </footer>
+<!-- axios -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js" integrity="sha512-uMtXmF28A2Ab/JJO2t/vYhlaa/3ahUOgj1Zf27M5rOo8/+fcTUVH0/E0ll68njmjrLqOBjXM3V9NiPFL5ywWPQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<!-- /js/imageboard/add.js   -->
+<script src="/js/add.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+
+function openpop() {
+  document.getElementById("popup_layer").style.display = "block";
+}
+
+function closePop() {
+  document.getElementById("popup_layer").style.display = "none";
+}
+</script>
 </body>
 </html>

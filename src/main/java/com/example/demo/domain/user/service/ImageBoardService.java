@@ -75,9 +75,13 @@ public class ImageBoardService {
             System.out.println("FILE SIZE:" + file.getSize()+"Byte");
             System.out.println("----------------------");
             boardlist.add(file.getOriginalFilename());
+            System.out.println(dto.getFiles());
 
             File fileobj = new File(uploadPath,file.getOriginalFilename());
             file.transferTo(fileobj);
+
+
+
 
 
             //thumbnail
