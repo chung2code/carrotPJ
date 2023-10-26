@@ -70,7 +70,7 @@ tasks.named('test') {
 }
 //@SpringBootApplication이 선언된  Mainclass 설정
 bootJar{
-	mainClassName = 'com.melon.boot.MelonApplication'
+	//mainClassName = 'com.melon.boot.MelonApplication'
 }
 //profile설정
 bootRun{

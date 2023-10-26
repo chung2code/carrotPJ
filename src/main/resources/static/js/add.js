@@ -1,5 +1,6 @@
-$(document).ready(function () {
-  const formData = new FormData(); // 폼 관련 저장
+
+document.addEventListener("DOMContentLoaded", function() {
+    const formData = new FormData(); // 폼 관련 저장
 
   const uploadBox_el = document.querySelector(".upload-box");
 
@@ -49,35 +50,32 @@ $(document).ready(function () {
     };
   });
 
-  $(".add_product-btn").click(function (event) {
+   document.querySelector(".add_product-btn").addEventListener('click', function (event) {
+        var titleValue = document.getElementById('title').value;
+        var detailsValue = document.getElementById('details').value;
+        var priceValue = document.getElementById('price').value;
+        var placeValue = document.getElementById('place').value;
 
-    var titleValue = document.imageform.title.value;
-    var detailsValue = document.imageform.details.value;
-    var priceValue = document.imageform.price.value;
-    var placeValue = document.imageform.place.value;
+        formData.append("title", titleValue);
+        formData.append("details", detailsValue);
+        formData.append("price", priceValue);
+        formData.append("place", placeValue);
 
-    formData.append("title", titleValue);
-    formData.append("details", detailsValue);
-    formData.append("price", priceValue);
-    formData.append("place", placeValue);
+        console.log('formData',formData);
 
-    console.log('formData',formData);
-
-      $.ajax({
-        type: "POST",
-        enctype:'multipart/form-data',
-        url: "/user/product/add",
-        data: formData,
-        processData: false,
-        contentType: false,
-        success: function (response) {
-          alert("성공적으로 게시물이 추가되었습니다.");
-          window.location.href = "/user/product/list";
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-          alert("게시물 추가 실패 : " + textStatus);
-          console.error(errorThrown);
-        },
-      });
-
-  });
+      axios({
+             method: "post",
+             url: "/user/product/add",
+             data: formData,
+             headers: { "Content-Type": "multipart/form-data" },
+           })
+           .then(function (response) {
+             alert("성공적으로 게시물이 추가되었습니다.");
+             window.location.href = "/user/product/list";
+           })
+           .catch(function (error) {
+             alert("게시물 추가 실패 : " + error);
+             console.error(error);
+           });
+         });
+       });
