@@ -68,3 +68,12 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+//@SpringBootApplication이 선언된  Mainclass 설정
+bootJar{
+	mainClassName = 'com.melon.boot.MelonApplication'
+}
+//profile설정
+bootRun{
+	String activeProfile = System.properties['spring.profile.active']
+	systemProperty "spring.profiles.active",activeProfile
+}

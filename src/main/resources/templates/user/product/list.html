@@ -111,8 +111,9 @@
 
                 <div th:each="imageBoard,i: ${list}" class="card">
                     <div class="img">
+                        <th:block th:if="${imageBoard != null && !imageBoard.files.isEmpty()}">
                         <img th:src="@{'/imageboard/'+${imageBoard.username}+'/'+${imageBoard.id}+'/'+${imageBoard.files.get(0)}}"alt="Image">
-
+                        </th:block>
 
                     </div>
                     <div class="text">
@@ -144,11 +145,12 @@
             </div>
             <!--팝업 컨텐츠 영역-->
             <h1>내 물건 팔기</h1>
-            <form
+            <form   name="imageform"
                     id="addform"
                     action="/user/product/add"
                     method="post"
                     enctype="multipart/form-data"
+                    onsubmit="return false"
             >
                 <div class="addcontent">
                     <div class="addimg">
@@ -215,7 +217,7 @@
                     <div class="writebtn">
                  <!-- <input class="addbtn" type="submit" value="작성 완료" />-->
 
-                        <button type="submit" class='add_product-btn'>작 성 완 료</button>
+                        <button  class='add_product-btn'>작 성 완 료</button>
                     </div>
                 </div>
             </form>

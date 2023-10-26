@@ -40,7 +40,7 @@ public class ImageBoardService {
 
     //add
     @Transactional(rollbackFor = Exception.class)
-    public void addImageBoard(ImageBoardDto dto)throws IOException{
+    public void addImageBoard(ImageBoardDto dto)throws IOException {
         System.out.println("ImageBoardService's addImage..");
 
         //DB저장후 처리
@@ -54,11 +54,11 @@ public class ImageBoardService {
         imageBoard.setCreatedAt(dto.getCreatedAt());
 
         imageBoardRepository.save(imageBoard);
-        System.out.println("저장확인 ID:"+imageBoard.getId());
+        System.out.println("저장확인 ID:" + imageBoard.getId());
 
         //저장 폴더 지정
 
-        String uploadPath =  imageBoardPath + File.separator + dto.getUsername()+File.separator +imageBoard.getId();
+        String uploadPath = imageBoardPath + File.separator + dto.getUsername() + File.separator + imageBoard.getId();
         File dir = new File(uploadPath);
         if (!dir.exists()) {
             dir.mkdirs();
@@ -67,25 +67,26 @@ public class ImageBoardService {
 
         //게시물당 파일은 5장까지
 
+
         List<String> boardlist = new ArrayList<>();
 
-        for(MultipartFile file : dto.getFiles()){
+        for(MultipartFile files : dto.getFiles()){
             System.out.println("---------------------");
-            System.out.println("FILE NAME:"+file.getOriginalFilename());
-            System.out.println("FILE SIZE:" + file.getSize()+"Byte");
+            System.out.println("FILE NAME:"+files.getOriginalFilename());
+            System.out.println("FILE SIZE:" + files.getSize()+"Byte");
             System.out.println("----------------------");
-            boardlist.add(file.getOriginalFilename());
+            boardlist.add(files.getOriginalFilename());
             System.out.println(dto.getFiles());
 
-            File fileobj = new File(uploadPath,file.getOriginalFilename());
-            file.transferTo(fileobj);
+            File fileobj = new File(uploadPath,files.getOriginalFilename());
+            files.transferTo(fileobj);
 
 
 
 
 
             //thumbnail
-            File thumbnailFile = new File(uploadPath,"s_"+file.getOriginalFilename());
+            File thumbnailFile = new File(uploadPath,"s_"+files.getOriginalFilename());
             BufferedImage bo_image = ImageIO.read(fileobj);
             BufferedImage bt_image = new BufferedImage(300,500,BufferedImage.TYPE_3BYTE_BGR);
             Graphics2D graphic = bt_image.createGraphics();
@@ -101,6 +102,38 @@ public class ImageBoardService {
 
 
     }
+//        List<String> boardlist = new ArrayList<>();
+//
+//// dto 객체와 getFiles() 메소드의 null 체크
+//        if (dto != null && dto.getFiles() != null) {
+//            for (MultipartFile files : dto.getFiles()) {
+//                System.out.println("---------------------");
+//                System.out.println("FILE NAME:" + files.getOriginalFilename());
+//                System.out.println("FILE SIZE:" + files.getSize() + "Byte");
+//                System.out.println("----------------------");
+//                boardlist.add(files.getOriginalFilename());
+//                System.out.println(dto.getFiles());
+//
+//                File fileobj = new File(uploadPath, files.getOriginalFilename());
+//                files.transferTo(fileobj);
+//
+//                //thumbnail
+//                File thumbnailFile = new File(uploadPath, "s_" + files.getOriginalFilename());
+//                BufferedImage bo_image = ImageIO.read(fileobj);
+//                BufferedImage bt_image = new BufferedImage(300, 500, BufferedImage.TYPE_3BYTE_BGR);
+//                Graphics2D graphic = bt_image.createGraphics();
+//                graphic.drawImage(bo_image, 0, 0, 300, 500, null);
+//                ImageIO.write(bt_image, "jpa", thumbnailFile);
+//            }
+//            imageBoard.setFiles(boardlist);
+//            imageBoardRepository.save(imageBoard);
+//        } else {
+//            // dto 객체 또는 getFiles() 메소드가 null인 경우 처리
+//            System.out.println("Dto object or files are null");
+//        }
+//
+//    }
+
     @Transactional(rollbackFor = Exception.class)
     public ImageBoard getImageboard(Long Id){
         Optional<ImageBoard> optionalImageBoard = imageBoardRepository.findById(Id);

@@ -22,7 +22,7 @@ public class ImageBoardDto {
     @NotBlank
     private String place;
     private String price;
-    private List<MultipartFile> files;
+    private MultipartFile[] files;
 
 
 

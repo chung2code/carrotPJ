@@ -36,6 +36,7 @@ $(document).ready(function () {
     // 미리보기 생성
     const file = imageFiles[0];
     formData.append("files", file); // formData에 저장
+    console.log(formData);
 
     const reader = new FileReader();
 
@@ -48,8 +49,7 @@ $(document).ready(function () {
     };
   });
 
-  $("#addform").submit(function (event) {
-    event.preventDefault();
+  $(".add_product-btn").click(function (event) {
 
     var titleValue = document.imageform.title.value;
     var detailsValue = document.imageform.details.value;
@@ -61,10 +61,11 @@ $(document).ready(function () {
     formData.append("price", priceValue);
     formData.append("place", placeValue);
 
-
+    console.log('formData',formData);
 
       $.ajax({
         type: "POST",
+        enctype:'multipart/form-data',
         url: "/user/product/add",
         data: formData,
         processData: false,
@@ -78,4 +79,5 @@ $(document).ready(function () {
           console.error(errorThrown);
         },
       });
+
   });

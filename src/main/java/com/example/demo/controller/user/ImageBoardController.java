@@ -49,21 +49,24 @@ public class ImageBoardController {
             @RequestParam("details") String details,
             @RequestParam("price") String price,
             @RequestParam("place") String place,
-            @RequestParam("files") List<MultipartFile> files,
+            @RequestParam(value = "files",required = false) MultipartFile[] files,
+
             Authentication authentication) throws IOException {
-        log.info("POST /user/product/add");
+            log.info("POST /user/product/add " + files);
+
 
         ImageBoardDto dto = new ImageBoardDto();
         dto.setTitle(title);
         dto.setDetails(details);
         dto.setPrice(price);
         dto.setPlace(place);
+        dto.setFiles(files);
 
 
-        if (!files.isEmpty()) {
-            // If the file list is not empty, add it to the DTO
-            dto.setFiles(files);
-        }
+       // if (!files.isEmpty()) {
+       //     // If the file list is not empty, add it to the DTO
+       //     dto.setFiles(files);
+       // }
 
         dto.setCreatedAt(LocalDateTime.now());
 
@@ -77,6 +80,8 @@ public class ImageBoardController {
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
+
+
     }
 
 
