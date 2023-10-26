@@ -31,9 +31,9 @@ PROJECTPLAN
 ## ▶️ 개발 환경(플랫폼)
 
 ##### OS : WINDOW Server 2022 base
-##### CPU SPEC : I7 Intel 
+##### CPU SPEC : I5 Intel 
 ##### RAM SPEC : 16GB SAMSUNG DDR4
-##### DISK SPEC : 100GB SSD 
+##### DISK SPEC : 256GB SSD 
 
 <br/>
 
@@ -46,7 +46,7 @@ PROJECTPLAN
 
 ##### IDE : IntelliJ IDEA 버전명
 ##### SpringBoot 2.7.15
-##### maven version 3.1.2
+##### gradle version 3.1.2
 ##### Git 3.1.1
 ##### Mysql Server 8.x.x
 ##### Mysql Workbench 8.x.x
