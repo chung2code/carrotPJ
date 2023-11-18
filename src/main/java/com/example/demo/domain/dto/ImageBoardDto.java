@@ -1,6 +1,6 @@
-package com.example.demo.domain.user.dto;
+package com.example.demo.domain.dto;
 
-import com.example.demo.domain.user.entity.Product;
+
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;

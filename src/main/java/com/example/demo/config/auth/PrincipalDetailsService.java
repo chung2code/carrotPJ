@@ -1,8 +1,8 @@
 package com.example.demo.config.auth;
 
-import com.example.demo.domain.user.dto.UserDto;
-import com.example.demo.domain.user.entity.User;
-import com.example.demo.domain.user.repository.UserRepository;
+import com.example.demo.domain.dto.UserDto;
+import com.example.demo.domain.entity.User;
+import com.example.demo.domain.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -30,6 +30,7 @@ public class PrincipalDetailsService implements UserDetailsService {
 		dto.setId(user.get().getId());
 		dto.setPassword(user.get().getPassword());
 		dto.setRole(user.get().getRole());
+		dto.setNickname(user.get().getNickname());
 
 		PrincipalDetails principalDetails = new PrincipalDetails();
 		principalDetails.setUser(dto);

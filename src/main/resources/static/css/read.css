@@ -18,6 +18,8 @@ body {
   font-weight: 400;
   min-height: 100%;
   min-width: 100%;
+  /*width: 1920px;*/
+
   display: inline;
 }
 section,
@@ -139,6 +141,17 @@ nav li a {
   font-size: large;
   text-align: center;
   margin-bottom: 3rem;
+}
+.logoutmenu{
+  display: flex;
+  line-height: 5px;
+}
+.item span{
+  position: relative;
+  top:5px;
+  font-size: medium;
+  font-weight: bold;
+
 }
 /* main */
 .read_page {

@@ -1,10 +1,9 @@
 package com.example.demo.controller.user;
 
 import com.example.demo.config.auth.PrincipalDetails;
-import com.example.demo.domain.user.dto.UserDto;
-import com.example.demo.domain.user.entity.User;
-import com.example.demo.domain.user.repository.UserRepository;
-import com.example.demo.domain.user.service.UserService;
+import com.example.demo.domain.dto.UserDto;
+import com.example.demo.domain.entity.User;
+import com.example.demo.domain.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import net.minidev.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,12 +23,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.util.Properties;
 
 @Controller

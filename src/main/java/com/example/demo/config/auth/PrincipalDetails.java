@@ -1,7 +1,7 @@
 package com.example.demo.config.auth;
 
 
-import com.example.demo.domain.user.dto.UserDto;
+import com.example.demo.domain.dto.UserDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -49,6 +49,9 @@ public class PrincipalDetails implements UserDetails , OAuth2User {
 		} );
 		
 		return collection;
+	}
+	public String getNickname() {
+		return user.getNickname();
 	}
 
 	@Override

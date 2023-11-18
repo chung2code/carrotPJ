@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -86,10 +86,25 @@
           <button class="chat_btn">채팅하기</button>
         </div>
 
-        <div class="login">
+        <div class="login" sec:authorize="!isAuthenticated()">
           <button type="button" onclick="location.href='/user/login'">로그인</button>
+        </div>
+        <div class="logoutmenu" sec:authorize="isAuthenticated()" >
+
+          <div class="item" >
+            <span sec:authentication="principal.nickname"></span> &nbsp<span>님</span>
+            <span class="myProvider" style="display:none;"  th:text="${#authentication.getPrincipal().getUser().getProvider()}"></span> </span>
+          </div>
+
+          <div class="item">
+            <form action="/logout" name="logoutForm"  method="post" onSubmit="return false" style="margin:0px;padding:0px;">
+              <button onclick="localLogout()" style="background-color:white;border:0px;outline:none;">로그아웃</button>
+            </form>
+          </div>
 
         </div>
+
+
       </div>
     </div>
   </div>

@@ -1,9 +1,9 @@
 package com.example.demo.controller.user;
 
 import com.example.demo.config.auth.PrincipalDetails;
-import com.example.demo.domain.user.dto.ImageBoardDto;
-import com.example.demo.domain.user.entity.ImageBoard;
-import com.example.demo.domain.user.service.ImageBoardService;
+import com.example.demo.domain.dto.ImageBoardDto;
+import com.example.demo.domain.entity.ImageBoard;
+import com.example.demo.domain.service.ImageBoardService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,7 +30,7 @@ public class ImageBoardController {
     private ImageBoardService imageBoardService;
 
     @GetMapping("list")
-    public void f1(String reset, Model model) {
+    public void readAll(String reset, Model model) {
         log.info("GET /user/product/list");
         List<ImageBoard> list = imageBoardService.getImageboardList();
         System.out.println(list);
@@ -40,11 +40,11 @@ public class ImageBoardController {
     }
 
     @GetMapping("/add")
-    public void f2(){
+    public void add(){
 
     }
     @PostMapping("/add")
-    public ResponseEntity<?> f2_post(
+    public ResponseEntity<?> add_post(
             @RequestParam("title") String title,
             @RequestParam("details") String details,
             @RequestParam("price") String price,
@@ -86,7 +86,7 @@ public class ImageBoardController {
 
 
     @GetMapping("/read")
-    public void f3(Long id,Model model){
+    public void read(Long id,Model model){
         System.out.println("GET/user/product/read.."+id);
         ImageBoard imageBoard = imageBoardService.getImageboard(id);
 

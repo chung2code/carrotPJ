@@ -60,6 +60,9 @@ dependencies {
 	//MAIL
 	implementation 'org.springframework.boot:spring-boot-starter-mail'
 
+	//modelmapper
+	implementation 'org.modelmapper:modelmapper:2.4.0'
+
 
 
 
@@ -69,9 +72,9 @@ tasks.named('test') {
 	useJUnitPlatform()
 }
 //@SpringBootApplication이 선언된  Mainclass 설정
-bootJar{
-	//mainClassName = 'com.melon.boot.MelonApplication'
-}
+//bootJar{
+//	mainClassName = 'com.melon.boot.MelonApplication'
+//}
 //profile설정
 bootRun{
 	String activeProfile = System.properties['spring.profile.active']

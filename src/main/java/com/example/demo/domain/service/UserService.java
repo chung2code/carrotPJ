@@ -1,16 +1,13 @@
-package com.example.demo.domain.user.service;
+package com.example.demo.domain.service;
 
-import com.example.demo.domain.user.dto.UserDto;
-import com.example.demo.domain.user.entity.User;
-import com.example.demo.domain.user.repository.UserRepository;
+import com.example.demo.domain.dto.UserDto;
+import com.example.demo.domain.repository.UserRepository;
+import com.example.demo.domain.entity.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 @Service
 @Slf4j
@@ -30,6 +27,7 @@ public class UserService {
         }
 
         dto.setRole("ROLE_USER");
+        dto.setProfileimage("/images/basic.webp");
         dto.setPassword(passwordEncoder.encode(dto.getPassword()));
 
         User user = UserDto.dtoToEntity(dto);

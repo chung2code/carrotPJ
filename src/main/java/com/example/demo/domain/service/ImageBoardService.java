@@ -1,8 +1,8 @@
-package com.example.demo.domain.user.service;
+package com.example.demo.domain.service;
 
-import com.example.demo.domain.user.dto.ImageBoardDto;
-import com.example.demo.domain.user.entity.ImageBoard;
-import com.example.demo.domain.user.repository.ImageBoardRepository;
+import com.example.demo.domain.entity.ImageBoard;
+import com.example.demo.domain.repository.ImageBoardRepository;
+import com.example.demo.domain.dto.ImageBoardDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ResourceLoader;
